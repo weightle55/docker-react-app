@@ -1,0 +1,13 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - echo "start creating an image with dockerfile"
+  - docker build -t weightle55/docker-react-app -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true weightle55/docker-react-app npm run test -- --coverage
